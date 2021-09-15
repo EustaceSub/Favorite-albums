@@ -13,11 +13,11 @@ public class DataParserTestUtil {
     public static final ObjectMapper MAPPER = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-    public static JsonNode readJsonFromFile(String s) throws IOException {
+    public static String readJsonFromFile(String s) throws IOException {
         var in = ItunesArtistsDataParserTest.class.getClassLoader()
                 .getResourceAsStream(s);
         return MAPPER.readTree(
                 in
-        );
+        ).toString();
     }
 }
