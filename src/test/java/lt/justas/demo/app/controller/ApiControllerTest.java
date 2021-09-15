@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = ApiController.class)
@@ -38,5 +39,13 @@ public class ApiControllerTest {
                 )
                 .andExpect(status().isCreated());
         verify(apiService).modifyUserFavoriteArtist(1L, 2L);
+    }
+
+    @Test
+    public void userFavoriteArtistTopAlbums() throws Exception {
+        mockMvc.perform(get("/api/user/1/favorite-artist-top-albums"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+        verify(apiService).getFavoriteArtistTopAlbums(1L);
     }
 }

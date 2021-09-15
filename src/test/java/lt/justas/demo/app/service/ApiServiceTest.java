@@ -1,6 +1,7 @@
 package lt.justas.demo.app.service;
 
 import lt.justas.demo.app.config.ItunesDataLoader;
+import lt.justas.demo.app.exception.UserNoFavoriteArtistException;
 import lt.justas.demo.app.repo.UserFavoriteArtistRepository;
 import lt.justas.demo.model.entity.UserFavoriteArtist;
 import org.junit.jupiter.api.Test;
@@ -9,9 +10,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static java.util.Optional.empty;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -64,6 +67,31 @@ public class ApiServiceTest {
                         .setUserId(1L)
                         .setAmgArtistId(2L)
         );
+    }
+    @Test
+    public void userWithoutFavoriteArtistTriesToGetTopAlbums() {
+        when(userFavoriteArtistRepository.findUserFavoriteArtistByUserId(1L))
+                .thenReturn(Optional.empty());
+        var caughtException = assertThrows(
+                UserNoFavoriteArtistException.class,
+                () -> apiService.getFavoriteArtistTopAlbums(1L)
+        );
+        assertEquals("User 1 does not have favorite artist", caughtException.getCause().getMessage());
+    }
+
+    @Test
+    public void userWithFavoriteArtistTriesToGetFavoriteAlbums() {
+        when(userFavoriteArtistRepository.findUserFavoriteArtistByUserId(1L))
+                .thenReturn(Optional.of(
+                                new UserFavoriteArtist()
+                                        .setId(3L)
+                                        .setUserId(1L)
+                                        .setAmgArtistId(8L)
+                        )
+                );
+        var result = apiService.getFavoriteArtistTopAlbums(1L);
+        assertTrue(result.isEmpty());
+        verify(itunesDataLoader). loadTopArtistAlbums(8L);
     }
 }
 
