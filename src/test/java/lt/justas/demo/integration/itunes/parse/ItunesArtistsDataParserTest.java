@@ -17,15 +17,15 @@ public class ItunesArtistsDataParserTest {
 
     @Test
     public void itunesNoArtistDataFoundParse() throws IOException {
-        JsonNode responseRaw = readJsonFromFile("lt/justas/demo/integration/itunes/noArtistData.json");
-        var result = itunesArtistsDataParser.parseData(responseRaw.toString());
+        var responseRaw = readJsonFromFile("lt/justas/demo/integration/itunes/noArtistData.json");
+        var result = itunesArtistsDataParser.parseData(responseRaw);
         assertEquals(0, result.size());
     }
 
     @Test
     public void itunesArtistDataParseCorrectly() throws IOException {
-        JsonNode responseRaw = readJsonFromFile("lt/justas/demo/integration/itunes/artistsData.json");
-        var result = itunesArtistsDataParser.parseData(responseRaw.toString());
+        var responseRaw = readJsonFromFile("lt/justas/demo/integration/itunes/artistsData.json");
+        var result = itunesArtistsDataParser.parseData(responseRaw);
         assertEquals(50, result.size());
     }
 
