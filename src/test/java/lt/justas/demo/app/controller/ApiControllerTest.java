@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = ApiController.class)
@@ -27,5 +28,15 @@ public class ApiControllerTest {
                 .param("artistName", "abba")
         ).andExpect(status().isOk());
         verify(apiService).searchArtistsByName("abba");
+    }
+
+    @Test
+    public void userFavoriteArtistEndpointExposed() throws Exception {
+        mockMvc.perform(post("/api/user/favorite/artist")
+                        .param("userId", "1")
+                        .param("artistId", "2")
+                )
+                .andExpect(status().isCreated());
+        verify(apiService).modifyUserFavoriteArtist(1L, 2L);
     }
 }
