@@ -22,13 +22,6 @@ public class ItunesArtistTopAlbumsParserTest {
     }
 
     @Test
-    public void itunesTopAlbumsEmptyParseCorrectly() throws IOException {
-        var responseRaw = readJsonFromFile("lt/justas/demo/integration/itunes/artistNoAlbums.json");
-        var result = itunesDataParser.parseData(responseRaw);
-        assertEquals(0, result.size());
-    }
-
-    @Test
     public void itunesTopAlbumsParseCorrectly() throws IOException {
         var responseRaw = readJsonFromFile("lt/justas/demo/integration/itunes/artistTop5FavoriteAlbums.json");
         var result = itunesDataParser.parseData(responseRaw);
