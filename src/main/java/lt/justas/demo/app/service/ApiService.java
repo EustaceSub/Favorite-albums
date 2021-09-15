@@ -1,11 +1,14 @@
 package lt.justas.demo.app.service;
 
 import lt.justas.demo.app.config.ItunesDataLoader;
+import lt.justas.demo.app.exception.UserNoFavoriteArtistException;
 import lt.justas.demo.app.repo.UserFavoriteArtistRepository;
+import lt.justas.demo.model.dto.AlbumDTO;
 import lt.justas.demo.model.dto.ArtistDTO;
 import lt.justas.demo.model.entity.UserFavoriteArtist;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -36,5 +39,15 @@ public class ApiService {
                     .setAmgArtistId(artistId);
             userFavoriteArtistRepository.save(newUserFavoriteArtist);
         }
+    }
+
+    public Collection<AlbumDTO> getFavoriteArtistTopAlbums(Long userId) {
+        var userByFavoriteArtist = userFavoriteArtistRepository
+                .findUserFavoriteArtistByUserId(userId);
+        var favoriteArtistId = userByFavoriteArtist.orElseThrow(
+                () -> new UserNoFavoriteArtistException(userId)
+        ).getAmgArtistId();
+
+        return itunesDataLoader.loadTopArtistAlbums(favoriteArtistId);
     }
 }

@@ -8,6 +8,7 @@ import lt.justas.demo.model.dto.AlbumDTO;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @AllArgsConstructor
 public class ItunesArtistTopAlbumsParser implements ItunesDataParser<AlbumDTO> {
@@ -16,7 +17,7 @@ public class ItunesArtistTopAlbumsParser implements ItunesDataParser<AlbumDTO> {
     private final ObjectMapper objectMapper;
 
     @Override
-    public Collection<AlbumDTO> parseData(String rawData) {
+    public List<AlbumDTO> parseData(String rawData) {
         var jsonNode = parseJsonString(rawData);
 
         var albums = new ArrayList<AlbumDTO>();

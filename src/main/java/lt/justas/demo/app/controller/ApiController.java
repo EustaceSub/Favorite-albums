@@ -1,10 +1,12 @@
 package lt.justas.demo.app.controller;
 
 import lt.justas.demo.app.service.ApiService;
+import lt.justas.demo.model.dto.AlbumDTO;
 import lt.justas.demo.model.dto.ArtistDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -28,5 +30,10 @@ public class ApiController {
     @ResponseStatus(CREATED)
     public void setFavoriteArtist(@RequestParam Long userId, @RequestParam Long artistId) {
         apiService.modifyUserFavoriteArtist(userId, artistId);
+    }
+
+    @GetMapping("/user/{userId}/favorite-artist-top-albums")
+    public Collection<AlbumDTO> getFavoriteArtistTopAlbums(@PathVariable Long userId) {
+        return apiService.getFavoriteArtistTopAlbums(userId);
     }
 }
