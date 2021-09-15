@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ItunesArtistsFetcherTest {
+
     @Mock
     RestTemplate restTemplate;
 
