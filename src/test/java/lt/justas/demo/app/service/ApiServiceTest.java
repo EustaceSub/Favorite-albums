@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
 import java.util.Optional;
 
 import static java.util.Optional.empty;
@@ -23,7 +22,7 @@ public class ApiServiceTest {
 
     @Mock
     private ItunesDataLoader itunesDataLoader;
-    
+
     @Mock
     private UserFavoriteArtistRepository userFavoriteArtistRepository;
 
@@ -68,6 +67,7 @@ public class ApiServiceTest {
                         .setAmgArtistId(2L)
         );
     }
+
     @Test
     public void userWithoutFavoriteArtistTriesToGetTopAlbums() {
         when(userFavoriteArtistRepository.findUserFavoriteArtistByUserId(1L))
@@ -91,7 +91,7 @@ public class ApiServiceTest {
                 );
         var result = apiService.getFavoriteArtistTopAlbums(1L);
         assertTrue(result.isEmpty());
-        verify(itunesDataLoader). loadTopArtistAlbums(8L);
+        verify(itunesDataLoader).loadTopArtistAlbums(8L);
     }
 }
 

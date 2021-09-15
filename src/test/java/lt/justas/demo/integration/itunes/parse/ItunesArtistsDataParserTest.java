@@ -1,6 +1,5 @@
 package lt.justas.demo.integration.itunes.parse;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import lt.justas.demo.model.dto.ArtistDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

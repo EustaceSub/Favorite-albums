@@ -12,4 +12,5 @@ public class ArtistDTO {
     private Integer amgArtistId;
 
     private String artistName;
+
 }

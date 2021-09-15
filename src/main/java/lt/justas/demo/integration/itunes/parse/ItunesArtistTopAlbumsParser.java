@@ -7,7 +7,6 @@ import lombok.Getter;
 import lt.justas.demo.model.dto.AlbumDTO;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @AllArgsConstructor
