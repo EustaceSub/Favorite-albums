@@ -13,4 +13,9 @@ public class ArtistDTO {
 
     private String artistName;
 
+    private String artistLinkUrl;
+
+    private String primaryGenreName;
+
+    private String primaryGenreId;
 }
