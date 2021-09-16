@@ -19,4 +19,4 @@ spring:
 
 springdoc:
   swagger-ui:
-    path: "/swagger"
+    path: "/${SWAGGER_URL:swagger}"
