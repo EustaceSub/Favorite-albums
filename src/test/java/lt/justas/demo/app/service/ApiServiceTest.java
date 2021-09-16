@@ -91,7 +91,7 @@ public class ApiServiceTest {
                 );
         var result = apiService.getFavoriteArtistTopAlbums(1L);
         assertTrue(result.isEmpty());
-        verify(itunesDataLoader).loadTopArtistAlbums(8L);
+        verify(itunesDataLoader).loadArtistTopAlbums(8L);
     }
 }
 

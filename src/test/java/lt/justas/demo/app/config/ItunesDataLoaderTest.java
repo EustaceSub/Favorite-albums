@@ -47,7 +47,7 @@ public class ItunesDataLoaderTest {
         when(itunesArtistTopAlbumsFetcher.fetchData(1L))
                 .thenReturn("success");
 
-        var result = itunesDataLoader.loadTopArtistAlbums(1L);
+        var result = itunesDataLoader.loadArtistTopAlbums(1L);
         assertEquals(0, result.size());
         verify(itunesArtistTopAlbumsFetcher).fetchData(1L);
         verify(itunesArtistTopAlbumsParser).parseData("success");

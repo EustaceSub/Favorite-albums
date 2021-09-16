@@ -48,6 +48,6 @@ public class ApiService {
                 () -> new UserNoFavoriteArtistException(userId)
         ).getAmgArtistId();
 
-        return itunesDataLoader.loadTopArtistAlbums(favoriteArtistId);
+        return itunesDataLoader.loadArtistTopAlbums(favoriteArtistId);
     }
 }

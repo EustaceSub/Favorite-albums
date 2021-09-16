@@ -32,7 +32,7 @@ public class ItunesDataLoader {
         return itunesArtistsDataParser.parseData(data);
     }
 
-    public List<AlbumDTO> loadTopArtistAlbums(Long artistId) {
+    public List<AlbumDTO> loadArtistTopAlbums(Long artistId) {
         var data = itunesArtistTopAlbumsFetcher.fetchData(artistId);
         return itunesArtistTopAlbumsParser.parseData(data);
     }
