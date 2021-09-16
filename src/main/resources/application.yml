@@ -12,6 +12,11 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+  cache:
+    cache-names: itunes-artists
+    caffeine:
+      spec: maximumSize=500, expireAfterAccess=10m
+
 springdoc:
   swagger-ui:
     path: "/swagger"
