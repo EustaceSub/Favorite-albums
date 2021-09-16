@@ -1,7 +1,7 @@
 demo:
   app:
     itunes:
-      hostUrl: "itunes.apple.com"
+      hostUrl: ${ITUNES_HOST:itunes.apple.com}
 
 spring:
   h2:
