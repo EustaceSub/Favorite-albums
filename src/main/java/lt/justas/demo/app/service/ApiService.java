@@ -26,11 +26,11 @@ public class ApiService {
     }
 
     public void modifyUserFavoriteArtist(Long userId, Long artistId) {
-        var userByFavoriteArtist = userFavoriteArtistRepository
+        var userWithFavoriteArtist = userFavoriteArtistRepository
                 .findUserFavoriteArtistByUserId(userId);
 
-        if (userByFavoriteArtist.isPresent()) {
-            var userFavoriteArtist = userByFavoriteArtist.get();
+        if (userWithFavoriteArtist.isPresent()) {
+            var userFavoriteArtist = userWithFavoriteArtist.get();
             userFavoriteArtist.setAmgArtistId(artistId);
             userFavoriteArtistRepository.save(userFavoriteArtist);
         } else {
@@ -42,9 +42,9 @@ public class ApiService {
     }
 
     public Collection<AlbumDTO> getFavoriteArtistTopAlbums(Long userId) {
-        var userByFavoriteArtist = userFavoriteArtistRepository
+        var userWithFavoriteArtist = userFavoriteArtistRepository
                 .findUserFavoriteArtistByUserId(userId);
-        var favoriteArtistId = userByFavoriteArtist.orElseThrow(
+        var favoriteArtistId = userWithFavoriteArtist.orElseThrow(
                 () -> new UserNoFavoriteArtistException(userId)
         ).getAmgArtistId();
 
