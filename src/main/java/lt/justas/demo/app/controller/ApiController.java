@@ -33,7 +33,7 @@ public class ApiController {
     }
 
     @GetMapping("/user/{userId}/favorite-artist-top-albums")
-    public Collection<AlbumDTO> getFavoriteArtistTopAlbums(@PathVariable Long userId) {
-        return apiService.getFavoriteArtistTopAlbums(userId);
+    public ResponseEntity<Collection<AlbumDTO>> getFavoriteArtistTopAlbums(@PathVariable Long userId) {
+        return ResponseEntity.ok(apiService.getFavoriteArtistTopAlbums(userId));
     }
 }
