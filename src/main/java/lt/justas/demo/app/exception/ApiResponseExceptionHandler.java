@@ -12,7 +12,7 @@ public class ApiResponseExceptionHandler extends ResponseEntityExceptionHandler 
     @ExceptionHandler(UserNoFavoriteArtistException.class)
     public ResponseEntity<Object> handleUserNotFoundException(UserNoFavoriteArtistException ex) {
 
-        return new ResponseEntity<>(ex.getCause().getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
 }

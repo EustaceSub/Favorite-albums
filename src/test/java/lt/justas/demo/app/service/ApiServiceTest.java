@@ -76,7 +76,7 @@ public class ApiServiceTest {
                 UserNoFavoriteArtistException.class,
                 () -> apiService.getFavoriteArtistTopAlbums(1L)
         );
-        assertEquals("User 1 does not have favorite artist", caughtException.getCause().getMessage());
+        assertEquals("User 1 does not have favorite artist", caughtException.getMessage());
     }
 
     @Test
