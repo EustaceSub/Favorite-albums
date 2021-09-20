@@ -44,9 +44,9 @@ public class ApiService {
     public Collection<AlbumDTO> getFavoriteArtistTopAlbums(Long userId) {
         var userWithFavoriteArtist = userFavoriteArtistRepository
                 .findUserFavoriteArtistByUserId(userId);
-        var favoriteArtistId = userWithFavoriteArtist.orElseThrow(
-                () -> new UserNoFavoriteArtistException(userId)
-        ).getAmgArtistId();
+        var favoriteArtistId = userWithFavoriteArtist
+                .map(UserFavoriteArtist::getAmgArtistId)
+                .orElseThrow(() -> new UserNoFavoriteArtistException(userId));
 
         return itunesDataLoader.loadArtistTopAlbums(favoriteArtistId);
     }
