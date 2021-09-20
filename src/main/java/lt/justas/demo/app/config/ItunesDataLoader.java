@@ -8,11 +8,12 @@ import lt.justas.demo.model.dto.AlbumDTO;
 import lt.justas.demo.model.dto.ArtistDTO;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Component
 @CacheConfig(cacheNames = {"itunes-artists"})
 public class ItunesDataLoader {
     private final ItunesArtistsFetcher itunesArtistsFetcher;
