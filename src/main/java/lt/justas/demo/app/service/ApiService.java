@@ -29,16 +29,11 @@ public class ApiService {
         var userWithFavoriteArtist = userFavoriteArtistRepository
                 .findUserFavoriteArtistByUserId(userId);
 
-        if (userWithFavoriteArtist.isPresent()) {
-            var userFavoriteArtist = userWithFavoriteArtist.get();
-            userFavoriteArtist.setAmgArtistId(artistId);
-            userFavoriteArtistRepository.save(userFavoriteArtist);
-        } else {
-            var newUserFavoriteArtist = new UserFavoriteArtist()
-                    .setUserId(userId)
-                    .setAmgArtistId(artistId);
-            userFavoriteArtistRepository.save(newUserFavoriteArtist);
-        }
+        var userWithFavArtist = userWithFavoriteArtist
+                .orElseGet(() -> new UserFavoriteArtist(userId));
+
+        userWithFavArtist.setAmgArtistId(artistId);
+        userFavoriteArtistRepository.save(userWithFavArtist);
     }
 
     public Collection<AlbumDTO> getFavoriteArtistTopAlbums(Long userId) {
